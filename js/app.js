@@ -1,3 +1,6 @@
+var character = function(){
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 // Enemies our player must avoid
 var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
@@ -14,13 +17,10 @@ var Enemy = function(x, y) {
 
 //collision between the bug and player
 Enemy.prototype.collision = function() {
-  if(player.x < this.x + this.width &&
-    player.x + player.width > this.x &&
-    player.y < this.y + this.height &&
-    player.height + player.y > this.y){
-      player.x = 305;
-      player.y = 400;
-  }
+    if(player.x < this.x + this.width && player.x + player.width > this.x && player.y < this.y + this.height && player.height + player.y > this.y){
+        player.x = 305;
+        player.y = 400;
+    }
 };
 
 // Update the enemy's position, required method for game
@@ -41,9 +41,7 @@ Enemy.prototype.reset = function(){
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+Enemy.prototype.render = character;
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -60,21 +58,21 @@ var Player = function(){
 Player.prototype.handleInput = function(key){
     switch (key){
         case "left":
-            this.x = this.x - 30;
+            this.x -= 101;
         break;
             
         case "right":
-            this.x = this.x + 30;
+            this.x += 101;
         break;
         
         case "up":
-            this.y = this.y - 30;
+            this.y -= 83;
         break;
 
         case "down":
-            this.y = this.y + 30;
+            this.y += 83;
         break;
-    };
+    }
 };
 
 //player cannot move out of the canvas
@@ -90,9 +88,7 @@ Player.prototype.update = function(dt){
     }
 };
 
-Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+Player.prototype.render = character;
 
 Player.prototype.reset = function(){
     this.x = 305;
