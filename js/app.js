@@ -41,7 +41,9 @@ Enemy.prototype.reset = function(){
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = character;
+Enemy.prototype.render = function(){
+    character.call(this);
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -88,11 +90,13 @@ Player.prototype.update = function(dt){
     }
 };
 
-Player.prototype.render = character;
-
 Player.prototype.reset = function(){
     this.x = 305;
     this.y = 400;
+};
+
+Player.prototype.render = function(){
+    character.call(this);
 };
 
 // Now instantiate your objects.
